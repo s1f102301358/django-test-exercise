@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+label{
+    pointer-events: none;
+    transition: .5s;
+}
+
+input:focus~label {
+    top: -20px;
+    left: 0;
+    font-size: 12px;
+}
