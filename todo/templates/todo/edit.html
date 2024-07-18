@@ -14,6 +14,12 @@
         <h1 class="mb-4">Edit Task</h1>
         <p class="mb-4">You can edit tasks from the following form.</p>
 
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+
         <form action="{% url 'update' task.id %}" method="post">
             {% csrf_token %}
             <div class="mb-3">

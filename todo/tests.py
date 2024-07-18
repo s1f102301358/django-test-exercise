@@ -68,9 +68,15 @@ class TodoViewTestCase(TestCase):
 
     def test_index_post(self):
         client = Client()
-        data = {'title': 'Task Task', 'due_at': '2024-06-30 23:59:59'}
+        data = {'title': 'Task Task', 'due_at': '2024-06-30T23:59:59'}
         response = client.post('/', data)
 
+        # リダイレクトが発生することを確認
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+        # リダイレクト先のレスポンスを検証
+        response = client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.templates[0].name, 'todo/index.html')
         self.assertEqual(len(response.context['tasks']), 1)
