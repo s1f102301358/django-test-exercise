@@ -71,6 +71,9 @@ class TodoViewTestCase(TestCase):
         data = {'title': 'Task Task', 'due_at': '2024-06-30 23:59:59'}
         response = client.post('/', data)
 
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.templates[0].name, 'todo/index.html')
         self.assertEqual(len(response.context['tasks']), 1)
