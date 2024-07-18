@@ -34,11 +34,20 @@
                 <button type="button" class="btn btn-success">Submit</button>
             </div>
         </form>
-
-        <div class="mb-4">
-            <a href="{% url 'index' %}?order=due" class="btn btn-link">Sort by Due Date</a>
-            <a href="{% url 'index' %}?order=post" class="btn btn-link">Sort by Posted Date</a>
+        
+        <div class="btn-group" role="group" aria-label="Default button group">
+            <button type="button" class="btn btn-primary">Sort by Due Date</button>
+            <a href ="{% url 'index' %}?order=due" class="btn btn-primary active">↑</a>
+            <a href ="{% url 'index' %}?order=-due" class="btn btn-primary active">↓</a>
         </div>
+
+        <div class="btn-group" role="group" aria-label="Default button group">
+            <button type="button" class="btn btn-primary">Sort by Posted Date</button>
+            <a href ="{% url 'index' %}?order=post" class="btn btn-primary active">↑</a>
+            <a href ="{% url 'index' %}?order=-post" class="btn btn-primary active">↓</a>
+        </div>
+    
+        <div class="mb-4"></div>
 
         <div>
             {% for task in tasks %}
