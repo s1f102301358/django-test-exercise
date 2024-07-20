@@ -4,7 +4,6 @@ from django.utils.timezone import make_aware
 from django.utils.dateparse import parse_datetime
 from todo.models import Task
 
-# Create your views here.
 def index(request):
     context = {}
     if request.method == 'POST':
@@ -25,14 +24,20 @@ def index(request):
                 task.save()
                 return redirect('index')
 
-    if request.GET.get('order') == 'due':
+    order = request.GET.get('order', 'due')
+    if order == 'due':
         tasks = Task.objects.order_by('due_at')
-    else:
+    elif order == '-due':
+        tasks = Task.objects.order_by('-due_at')
+    elif order == 'post':
+        tasks = Task.objects.order_by('posted_at')
+    elif order == '-post':
         tasks = Task.objects.order_by('-posted_at')
+    else:
+        tasks = Task.objects.order_by('due_at')  # デフォルトのソート順
 
     context['tasks'] = tasks
     return render(request, 'todo/index.html', context)
-
 def detail(request, task_id):
     try:
         task = Task.objects.get(pk=task_id)

@@ -11,8 +11,7 @@
 
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Sample To Do Application</h1>
-        <p class="mb-4">You can submit tasks from the following form.</p>
+        <h1 class="mb-4">To Do Application</h1>
 
         {% if error %}
         <div class="alert alert-danger" role="alert">
@@ -23,26 +22,27 @@
         <form action="{% url 'index' %}" method="post" class="mb-4">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="titleInput" class="form-label">Title</label>
-                <input id="titleInput" name="title" type="text" class="form-control" placeholder="Input title">
+                <label for="titleInput" class="form-label">タイトル: </label>
+                <input id="titleInput" name="title" type="text" class="form-control" placeholder="タイトルを入力してください">
             </div>
             <div class="mb-3">
-                <label for="dueInput" class="form-label">Due at:</label>
+                <label for="dueInput" class="form-label">期限:</label>
                 <input id="dueInput" name="due_at" type="datetime-local" class="form-control">
             </div>
             <div>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success">提出</button>
             </div>
+            <hr>
         </form>
         
         <div class="btn-group" role="group" aria-label="Default button group">
-            <button type="button" class="btn btn-primary">Sort by Due Date</button>
+            <button type="button" class="btn btn-primary">期限順にソート</button>
             <a href ="{% url 'index' %}?order=due" class="btn btn-primary active">↑</a>
             <a href ="{% url 'index' %}?order=-due" class="btn btn-primary active">↓</a>
         </div>
 
         <div class="btn-group" role="group" aria-label="Default button group">
-            <button type="button" class="btn btn-primary">Sort by Posted Date</button>
+            <button type="button" class="btn btn-primary">投稿日順にソート</button>
             <a href ="{% url 'index' %}?order=post" class="btn btn-primary active">↑</a>
             <a href ="{% url 'index' %}?order=-post" class="btn btn-primary active">↓</a>
         </div>
@@ -55,14 +55,14 @@
                 <div class="card-body">
                     <h2 class="card-title"><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Posted at: {{ task.posted_at }}</li>
+                        <li class="list-group-item">投稿日: {{ task.posted_at }}</li>
                         {% if task.due_at %}
-                        <li class="list-group-item">Due at: {{ task.due_at }}</li>
+                        <li class="list-group-item">期限: {{ task.due_at }}</li>
                         {% endif %}
                         {% if task.completed %}
-                        <li class="list-group-item">Status: Completed</li>
+                        <li class="list-group-item">ステータス: Completed</li>
                         {% else %}
-                        <li class="list-group-item">Status: Not Completed</li>
+                        <li class="list-group-item">ステータス: Not Completed</li>
                         {% endif %}
                     </ul>
                 </div>

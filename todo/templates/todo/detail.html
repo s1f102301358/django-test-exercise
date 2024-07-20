@@ -13,22 +13,22 @@
     <div class="container mt-5">
         <h1 class="mb-4">{{ task.title }}</h1>
         <ul class="list-group mb-4">
-            <li class="list-group-item">Posted at: {{ task.posted_at }}</li>
+            <li class="list-group-item">投稿日: {{ task.posted_at }}</li>
             {% if task.due_at %}
-            <li class="list-group-item">Due at: {{ task.due_at }}</li>
+            <li class="list-group-item">期限: {{ task.due_at }}</li>
             {% endif %}
             {% if task.completed %}
-            <li class="list-group-item">Status: Completed</li>
+            <li class="list-group-item">ステータス: 完了</li>
             {% else %}
-            <li class="list-group-item">Status: Not Completed</li>
+            <li class="list-group-item">ステータス: 未完了</li>
             {% endif %}
         </ul>
 
 
-            <a href="{% url 'index' %}" class="btn btn-secondary">Top</a>
-            <a href="{% url 'update' task.id %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'delete' task.id %}" class="btn btn-danger">Delete</a>
-            <a href="{% url 'close' task.id %}" class="btn btn-success">Close</a>
+            <a href="{% url 'index' %}" class="btn btn-secondary">トップページ</a>
+            <a href="{% url 'update' task.id %}" class="btn btn-primary">編集</a>
+            <a href="{% url 'delete' task.id %}" class="btn btn-danger">削除</a>
+            <a href="{% url 'close' task.id %}" class="btn btn-success">完了としてマーク</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
